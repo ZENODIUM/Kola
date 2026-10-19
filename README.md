@@ -33,40 +33,7 @@ Kola is an awareness and workflow aid, not a medical device. It does not identif
 
 ## How Kola works
 
-```text
-Android camera or saved video
-                |
-                v
-     Analyze each frame on the phone
-                |
-       +--------+--------+
-       |                 |
-       v                 v
- Measure movement    Check pose and
- and camera health   visible objects
-       |                 |
-       v                 v
- Compare movement    Track object
- with the custom     persistence
- safe zone               |
-       |                 |
-       +--------+--------+
-                |
-                v
-  Create a clear event when a rule is met
-                |
-                v
- Update metrics, heatmap, and history
-       ^
-       |
-       +-- movement and camera health also feed this step
-                |
-                v
- Optional numeric sync to web dashboard
-                |
-                v
- Caregiver sees charts, events, and settings
-```
+The phone starts from the Android camera or a saved video and analyzes each frame on the device. It measures movement and camera health, and it checks pose and visible objects. Movement is compared with the custom safe zone. Objects are tracked for how long they stay visible. When a rule is met, Kola creates a clear event. Movement and events update the metrics, heatmap, and history. Those numbers can sync to the web dashboard, where a caregiver sees charts, events, and settings.
 
 The phone turns video into small, explainable measurements first. The dashboard receives those measurements and events rather than raw camera frames.
 
