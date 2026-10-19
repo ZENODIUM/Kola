@@ -1,0 +1,31 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { server } from './server.mjs';
+
+test('status and incidents round-trip through the sync API', async () => {
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  const statusResult = await fetch(`${base}/api/status`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ device: 'test phone', fps: 24, motionArea: 0.31, stability: 0.82, direction: 'LEFT' }) });
+  assert.equal(statusResult.status, 200);
+  const eventResult = await fetch(`${base}/api/events`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ kind: 'boundary', title: 'Crossing' }) });
+  assert.equal(eventResult.status, 201);
+  const state = await (await fetch(`${base}/api/state`)).json();
+  assert.equal(state.status.device, 'test phone');
+  assert.equal(state.status.motionArea, 0.31);
+  assert.equal(state.status.direction, 'LEFT');
+  assert.equal(state.events[0].title, 'Crossing');
+  const settingsResult = await fetch(`${base}/api/settings`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ movement_burst: false, unsafe_item: false }) });
+  assert.equal(settingsResult.status, 200);
+  const settings = await (await fetch(`${base}/api/settings`)).json();
+  assert.equal(settings.movement_burst, false);
+  assert.equal(settings.unsafe_item, false);
+  const videosResult = await fetch(`${base}/api/videos`);
+  assert.equal(videosResult.status, 200);
+  const videos = await videosResult.json();
+  assert.ok(videos.length > 0);
+  assert.match(videos[0].url, /^\/videos\//);
+  const videoResult = await fetch(`${base}${videos[0].url}`, { headers: { range: 'bytes=0-15' } });
+  assert.equal(videoResult.status, 206);
+  assert.equal((await videoResult.arrayBuffer()).byteLength, 16);
+  await new Promise(resolve => server.close(resolve));
+});
