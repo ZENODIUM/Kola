@@ -1,5 +1,7 @@
 # Kola
 
+**Try the [web demo](https://web-chi-two-3ke3ttj1ky.vercel.app)** · **[Download the Android APK](https://drive.google.com/file/d/1O2MNI_M0R-juki2TWICV_GkmLz4MrNm4/view?usp=sharing)**
+
 ## The problem
 
 A baby monitor can show a room, but it usually leaves the caregiver to watch a silent video feed and decide what matters. A boundary can be crossed, the camera can move, the view can become blocked, or a new object can remain nearby without producing a clear explanation.
