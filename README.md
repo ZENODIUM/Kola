@@ -1,6 +1,8 @@
 # Kola
 
-**Try the [web demo](https://web-chi-two-3ke3ttj1ky.vercel.app)** · **[Download the Android APK](https://drive.google.com/file/d/1O2MNI_M0R-juki2TWICV_GkmLz4MrNm4/view?usp=sharing)**
+**[Live dashboard](https://web-chi-two-3ke3ttj1ky.vercel.app)** · **[Android APK](https://drive.google.com/file/d/1O2MNI_M0R-juki2TWICV_GkmLz4MrNm4/view?usp=sharing)**
+
+---
 
 ## The problem
 
